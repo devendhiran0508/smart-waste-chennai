@@ -1,0 +1,8 @@
+streamlit
+paho-mqtt
+influxdb-client
+ortools
+folium
+streamlit-folium
+plotly
+pandas
