@@ -56,13 +56,13 @@ def fetch_bin_data():
                 if bin_id and bin_id not in seen:
                     seen.add(bin_id)
                     bins.append({
-                        "bin_id":   bin_id,
+                        "bin_id":   record.values.get("bin_id"),
                         "zone":     record.values.get("zone", "Unknown"),
                         "type":     record.values.get("type", "dry"),
-                        "fill_pct": record.values.get("fill_pct", 0),
-                        "battery":  record.values.get("battery", 100),
-                        "lat":      record.values.get("lat", 13.03),
-                        "lon":      record.values.get("lon", 80.23),
+                        "fill_pct": record.values.get("fill_pct") or 0,
+                        "battery":  record.values.get("battery") or 100,
+                        "lat":      record.values.get("lat") or 13.03,
+                        "lon":      record.values.get("lon") or 80.23,
                         "status":   record.values.get("status", "OK")
                     })
         return bins
