@@ -41,9 +41,11 @@ def fetch_bin_data():
         query_api = client.query_api()
         query = f'''
         from(bucket: "{INFLUX_BUCKET}")
-          |> range(start: -1h)
+          |> range(start: -2h)
           |> filter(fn: (r) => r._measurement == "bin_reading")
+          |> filter(fn: (r) => r._field == "fill_pct" or r._field == "battery" or r._field == "lat" or r._field == "lon")
           |> last()
+          |> pivot(rowKey: ["_time"], columnKey: ["_field"], valueColumn: "_value")
         '''
         tables = query_api.query(query, org=INFLUX_ORG)
         bins = []
